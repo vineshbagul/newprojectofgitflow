@@ -12,8 +12,7 @@ pipeline{
                    git branch: 'main', url: 'https://github.com/vineshbagul/newprojectofgitflow.git'
                 }
             }
-
-            stage('UNIT test'){
+            stage('UNIT testing'){
 
                 steps{
 
