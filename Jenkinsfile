@@ -25,6 +25,12 @@ pipeline{
                                           }
                                       }
 
+                 stage('Maven Build'){
+
+                                    steps{
+                                       bat 'mvn clean install'
+                                              }
+                                           }
 
 
        }
