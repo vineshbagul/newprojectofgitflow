@@ -1,48 +1,56 @@
 pipeline{
 
-    agent any
+agent any
 
-    stages {
+stages {
 
-        stage('Git Checkout'){
+    stage('Git Checkout'){
 
-            steps{
-                   git branch: 'main', url: 'https://github.com/vineshbagul/newprojectofgitflow.git'
-                }
+        steps{
+               git branch: 'main', url: 'https://github.com/vineshbagul/newprojectofgitflow.git'
             }
+        }
 
-             stage('UNIT Testing'){
+         stage('UNIT Testing'){
 
-                        steps{
-                               bat 'mvn test'
-                            }
+                    steps{
+                           bat 'mvn test'
                         }
+                    }
 
-                stage('Integration Testing'){
+            stage('Integration Testing'){
 
-                              steps{
-                                  bat 'mvn verify -DskipUnitTests'
-                                          }
+                          steps{
+                              bat 'mvn verify -DskipUnitTests'
                                       }
+                                  }
 
-                 stage('Maven Build'){
+             stage('Maven Build'){
 
-                                    steps{
-                                       bat 'mvn clean install'
-                                              }
-                                           }
-                    stage('Static code analysis'){
+                                steps{
+                                   bat 'mvn clean install'
+                                          }
+                                       }
+                stage('Static code analysis'){
 
-                                             steps{
-                                                script {
-                                                  withSonarQubeEnv(credentialsId: 'sonar-api') {
-                                                        bat 'mvn clean package sonar:sonar '
-                                                            }
-                                                      }
-                                                 }
-                                                 }
+                                         steps{
+                                            script {
+                                              withSonarQubeEnv(credentialsId: 'sonar-api') {
+                                                    bat 'mvn clean package sonar:sonar '
+                                                        }
+                                                  }
+                                             }
+                                             }
+
+                 stage('Quality gate Status'){
+                  steps{
+                   script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
+                    }
+                  }
+                 }
 
 
-       }
- }
+   }
+}
 
