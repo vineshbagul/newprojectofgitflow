@@ -42,24 +42,24 @@ stages {
                                              }
                                              }
 
-                 stage('Quality gate Status'){
-                  steps{
-                   script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
-                    }
-                  }
-                 }
+                                     stage('Quality gate Status'){
+                                      steps{
+                                       script{
+                                        waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
+                                        }
+                                      }
+                                     }
 
-                 stage('Upload war file to nexus'){
-                 steps{
-                    def readPomVersion = readMavenPom file: 'pom.xml'
-                    script {
-                      nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexus-auth', groupId: 'com.example', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'demoapp-release', version: 'readPomVersion.version'
-                      }
-                 }
-                 }
+                                     stage('Upload war file to nexus'){
+                                     steps{
+                                        def readPomVersion = readMavenPom file: 'pom.xml'
+                                        script {
+                                          nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexus-auth', groupId: 'com.example', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'demoapp-release', version: 'readPomVersion.version'
+                                          }
+                                     }
+                                     }
 
 
-   }
-}
+                   }
+                }
 
