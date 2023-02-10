@@ -55,7 +55,7 @@ stages {
 
                                         script {
                                          def readPomVersion = readMavenPom file: 'pom.xml'
-                                          nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexus-auth', groupId: 'com.example', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'demoapp-release', version: '${readPomVersion.version}'
+                                          nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexus-auth', groupId: 'com.example', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'demoapp-release', version:"${readPomVersion.version}"
                                           }
                                      }
                                      }
