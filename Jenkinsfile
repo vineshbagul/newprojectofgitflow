@@ -66,11 +66,11 @@ stages {
 
                                      stage('Docker Image Build'){
                                      steps{
-                                     script(
+                                     script{
                                       sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                                      sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vineshbagul/$JOB_NAME:v1.$BUILD_ID'
-                                       sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vineshbagul/$JOB_NAME:latest'
-                                      )
+                                       sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vineshbagul/$JOB_NAME:v1.$BUILD_ID'
+                                        sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vineshbagul/$JOB_NAME:latest'
+                                     }
                                      }
 
                                      }
