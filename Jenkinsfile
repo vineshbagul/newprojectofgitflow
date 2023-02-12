@@ -72,7 +72,6 @@ stages {
                                         bat 'docker image tag $JOB_NAME:v1.$BUILD_ID vineshbagul/$JOB_NAME:latest'
                                      }
                                      }
-
                                      }
 
 
